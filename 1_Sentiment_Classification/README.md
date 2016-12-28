@@ -19,7 +19,15 @@ In China, the file can be downloaded using Baidu Yun more fast from [here](http:
 
 2. Unzip the zip file, we can get two files:
 
-    * training.1600000.processed.noemoticon.csv（238M）
-    * testdata.manual.2009.06.14.csv（74K）
+    * training.1600000.processed.noemoticon.csv (238M)
+    * testdata.manual.2009.06.14.csv (74K)
 
-3.
+3. Data pre-processing
+
+Convert the two raw data into two files: training.csv, testing.csv, which only contains label and tweet. The file *lexicon.p* is the vocabularies.
+
+```python
+python pre-processing.py training.1600000.processed.noemoticon.csv testdata.manual.2009.06.14.csv
+```
+
+4.
