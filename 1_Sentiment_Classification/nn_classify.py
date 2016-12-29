@@ -10,10 +10,13 @@ Tweets classification using neural network
 
 
 class NN(object):
-    def __init__(self, n_input_layer, n_hidden_layer_1, n_hidden_layer_2, n_output_layer, learning_rate):
+    def __init__(self, n_input_layer, n_hidden_layer_1, n_hidden_layer_2, n_hidden_layer_3, n_hidden_layer_4,
+                 n_output_layer, learning_rate):
         self.n_input_layer = n_input_layer
         self.n_hidden_layer_1 = n_hidden_layer_1
         self.n_hidden_layer_2 = n_hidden_layer_2
+        self.n_hidden_layer_3 = n_hidden_layer_3
+        self.n_hidden_layer_4 = n_hidden_layer_4
         self.n_output_layer = n_output_layer
         self.learning_rate = learning_rate
 
@@ -26,8 +29,14 @@ class NN(object):
         with tf.name_scope("hidden_2"):
             h2 = self.add_layer(h1, self.n_hidden_layer_1, self.n_hidden_layer_2)
 
+        with tf.name_scope("hidden_3"):
+            h3 = self.add_layer(h2, self.n_hidden_layer_2, self.n_hidden_layer_3)
+
+        with tf.name_scope("hidden_4"):
+            h4 = self.add_layer(h3, self.n_hidden_layer_3, self.n_hidden_layer_4)
+
         with tf.name_scope("out_put"):
-            self.pred = self.add_layer(h2, self.n_hidden_layer_2, self.n_output_layer, activation=tf.nn.softmax)
+            self.pred = self.add_layer(h4, self.n_hidden_layer_4, self.n_output_layer, activation=tf.nn.softmax)
 
         with tf.name_scope("cost"):
             self.cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(self.pred, self.ys))
@@ -39,7 +48,7 @@ class NN(object):
 
     def add_layer(self, x, in_size, out_size, activation=None):
         W = tf.Variable(tf.random_normal([in_size, out_size]))
-        b = tf.Variable(tf.constant(0.1, shape=[out_size]))
+        b = tf.Variable(tf.zeros([out_size]) + 0.1)
         h = tf.matmul(x, W) + b
         h = tf.nn.relu(h) if activation is None else activation(h)
         return h
@@ -107,8 +116,10 @@ def comput_acc(pred, target):
 def run():
     # model parameters
     n_input_layer = 34963 + 1
-    n_hidden_layer_1 = 2000
-    n_hidden_layer_2 = 2000
+    n_hidden_layer_1 = 1024
+    n_hidden_layer_2 = 1024
+    n_hidden_layer_3 = 1024
+    n_hidden_layer_4 = 1024
     n_output_layer = 3  # 3 classes
 
     # training parameters
@@ -117,7 +128,8 @@ def run():
     update_step = 32
     learning_rate = 0.01
 
-    model = NN(n_input_layer, n_hidden_layer_1, n_hidden_layer_2, n_output_layer, learning_rate)
+    model = NN(n_input_layer, n_hidden_layer_1, n_hidden_layer_2, n_hidden_layer_3, n_hidden_layer_4, n_output_layer,
+               learning_rate)
 
     data = get_batch_data(batch_size)
 
@@ -134,7 +146,7 @@ def run():
 
             if i % update_step == 0:
                 test_cost = sess.run([model.cost], feed_dict={model.xs: x_test, model.ys: y_test})
-                print("Step: %s\n, train cost: %s, test cost: %s" % (i, train_cost, test_cost))
+                print("step: %s\n, train cost: %s, test cost: %s" % (i, train_cost, test_cost))
 
                 acc = comput_acc(model.pred, model.ys)
                 train_acc = sess.run(acc, feed_dict={model.xs: x_batch, model.ys: y_batch})
