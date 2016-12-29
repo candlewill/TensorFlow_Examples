@@ -94,17 +94,17 @@ def get_test_data():
     for i in range(len(vocab)):
         vocab_index[vocab[i]] = i + 1
 
-    x_batch = np.zeros((len(lines), len(vocab) + 1))
-    y_batch = []
+    x_test = np.zeros((len(lines), len(vocab) + 1))
+    y_test = []
     for i, line in enumerate(lines):
         y, x = line.split(":%:%:%:")
         words = x.strip().split(" ")
         for word in words:
-            x_batch[i][vocab_index[word]] = 1
+            x_test[i][vocab_index[word]] = 1
 
-        y_batch.append(eval(y))
+        y_test.append(eval(y))
 
-    return (x_batch, y_batch)
+    return (x_test, y_test)
 
 
 def comput_acc(pred, target):
@@ -159,7 +159,7 @@ def run():
                     print("Model saved at step %s" % i)
                     pre_accuracy = test_acc
 
-                print()
+                print("-" * 50)
 
 
 if __name__ == '__main__':

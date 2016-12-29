@@ -9,7 +9,7 @@ pre-process tweets, and build vocabulary
 
 Run:
 
-$ python pre-processing.py training.1600000.processed.noemoticon.csv testdata.manual.2009.06.14.csv
+$ python pre_processing.py training.1600000.processed.noemoticon.csv testdata.manual.2009.06.14.csv
 '''
 
 
