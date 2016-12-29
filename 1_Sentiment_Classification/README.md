@@ -1,6 +1,6 @@
 # Sentiment Classification
 
-This example use Neural Network (NN) and Convolutional NN to classify tweets into 3 classes, negative (0), neutral (2), positive (4).
+This example use Neural Network (NN) and Convolutional NN (CNN) to classify tweets into 3 classes, negative (0), neutral (2), positive (4).
 
 ## Data
 
@@ -15,16 +15,16 @@ This example use Neural Network (NN) and Convolutional NN to classify tweets int
  * 4 – the user that tweeted (robotickilldozr)
  * 5 – the text of the tweet (Lyx is cool)
 
- In China, the file can be downloaded using Baidu Yun more fast from [here](http://pan.baidu.com/s/1jHCiTb4), psw: 4wub
+ In China, the file can be downloaded faster using Baidu Yun storage from [here](http://pan.baidu.com/s/1jHCiTb4) with psw *4wub*
 
-2. Unzip the zip file, we can get two files:
+2. Unzip the zip file, we can get two csv files:
 
  * training.1600000.processed.noemoticon.csv (238M)
  * testdata.manual.2009.06.14.csv (74K)
 
 ## Data pre-processing
 
-Convert the two raw data into two files: training.csv, testing.csv, which only contains label and tweet. The file *lexicon.p* is the vocabularies.
+Pre-processing each tweet and convert the two raw data into two files: training.csv, testing.csv, which only contains label and tweet. The file *lexicon.p* is the vocabularies.
 
 ```python
 python pre-processing.py training.1600000.processed.noemoticon.csv testdata.manual.2009.06.14.csv
