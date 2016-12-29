@@ -30,7 +30,7 @@ Pre-processing each tweet and convert the two raw data into two files: training.
 python pre-processing.py training.1600000.processed.noemoticon.csv testdata.manual.2009.06.14.csv
 ```
 
-After that, we can get **34963** words, and the first and last 100 words are:
+After that, we can get **34,963** words, and the first and last 100 words are:
 
 The first 100 words are:
 

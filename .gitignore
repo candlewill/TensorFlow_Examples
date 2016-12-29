@@ -4,3 +4,6 @@
 .idea/workspace.xml
 .idea/vcs.xml
 .idea/misc.xml
+1_Sentiment_Classification/testdata.manual.2009.06.14.csv
+1_Sentiment_Classification/training.1600000.processed.noemoticon.csv
+1_Sentiment_Classification/training.csv
