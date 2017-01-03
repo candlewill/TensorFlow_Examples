@@ -1,9 +1,7 @@
 import tensorflow as tf
-import random
 import pickle
 import numpy as np
 from collections import defaultdict
-from tensorflow.contrib import learn
 
 '''
 Tweets classification using neural network. Word embeddings are used is this example.
@@ -112,7 +110,7 @@ def sent_2_idx(filename, text, max_sentence_length, vocab_size):
     vocab = pickle.load(open(filename, 'rb'))
     print("Total vocabularies: ", len(vocab))
     print("Actual use %s words" % vocab_size)
-    vocab = vocab[:vocab_size]
+    vocab = vocab[:vocab_size - 1]
 
     vocab_index = defaultdict(int)
     for i in range(len(vocab)):
@@ -146,7 +144,7 @@ def load_data(filename, sequence_length, vocab_size):
     print("average document length: ", np.mean(document_length))
     print("Actual document length: ", sequence_length)
 
-    x_text = sent_2_idx("lexcion.p", x_text, sequence_length, vocab_size - 1)
+    x_text = sent_2_idx("lexcion.p", x_text, sequence_length, vocab_size)
 
     shuffle_indices = np.random.permutation(np.arange(len(y_text)))
 
