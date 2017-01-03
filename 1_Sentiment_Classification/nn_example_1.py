@@ -2,7 +2,18 @@ import tensorflow as tf
 import numpy as np
 
 '''
-Use NN to classify a random 0 and 1 list, into 3 classes
+Use NN to classify a random 0 and 1 list, into 3 classes:
+
+[1, 0, 0] if there are 0, 3, 6, ..., 15 ones in the list
+[0, 1, 0] if there are 1, 4, 7, ..., 16 ones in the list
+[0, 0, 1] otherwise
+
+After 20,000 epoches, we can get the following result:
+
+Loss:  0.257163
+Epoch: 13400, Accuracy
+, train acc: 0.953125, test acc: 0.966
+Model saved at step 13400
 '''
 
 
@@ -21,18 +32,18 @@ class NN(object):
             self.add_input()
 
         with tf.name_scope("hidden_1"):
-            h1 = self.add_layer(self.xs, self.n_input_layer, self.n_hidden_layer_1, activation=tf.nn.relu)
+            h1 = self.add_layer(self.xs, self.n_input_layer, self.n_hidden_layer_1, activation=tf.nn.tanh)
 
         with tf.name_scope("hidden_2"):
-            h2 = self.add_layer(h1, self.n_hidden_layer_1, self.n_hidden_layer_2, activation=tf.nn.relu)
+            h2 = self.add_layer(h1, self.n_hidden_layer_1, self.n_hidden_layer_2, activation=tf.nn.tanh)
 
         with tf.name_scope("hidden_3"):
-            h3 = self.add_layer(h2, self.n_hidden_layer_2, self.n_hidden_layer_3, activation=tf.nn.relu)
+            h3 = self.add_layer(h2, self.n_hidden_layer_2, self.n_hidden_layer_3, activation=tf.nn.tanh)
 
         with tf.name_scope("hidden_4"):
-            h4 = self.add_layer(h3, self.n_hidden_layer_3, self.n_hidden_layer_4, activation=tf.nn.relu)
+            h4 = self.add_layer(h3, self.n_hidden_layer_3, self.n_hidden_layer_4, activation=tf.nn.tanh)
 
-        with tf.name_scope("out_put"):
+        with tf.name_scope("output"):
             self.pred = self.add_layer(h4, self.n_hidden_layer_4, self.n_output_layer, activation=None)
 
         with tf.name_scope("cost"):
@@ -77,7 +88,7 @@ def get_test_data():
     # load test data
     x_test = []
     y_test = []
-    for i in range(100):
+    for i in range(1000):
         line = np.random.choice([0, 1], size=(16))
         x_test.append(line)
         sum = np.sum(line)
@@ -109,9 +120,9 @@ def run():
 
     # training parameters
     batch_size = 256
-    epoch = 10000
-    update_step = 20
-    learning_rate = 0.5
+    epoch = 20000
+    display_step = 200
+    learning_rate = 0.01
 
     model = NN(n_input_layer, n_hidden_layer_1, n_hidden_layer_2, n_hidden_layer_3, n_hidden_layer_4, n_output_layer,
                learning_rate)
@@ -133,16 +144,12 @@ def run():
 
             _, train_cost = sess.run([model.train_op, model.cost], feed_dict={model.xs: x_batch, model.ys: y_batch})
 
-            if i % update_step == 0:
-                # print(sess.run(model.h4))
-
-                test_cost = sess.run(model.cost, feed_dict={model.xs: x_test, model.ys: y_test})
-                print("step: %s\n, train cost: %s, test cost: %s" % (i, train_cost, test_cost))
-
+            if i % display_step == 0:
                 acc = comput_acc(model.pred, model.ys)
                 train_acc = sess.run(acc, feed_dict={model.xs: x_batch, model.ys: y_batch})
                 test_acc = sess.run(acc, feed_dict={model.xs: x_test, model.ys: y_test})
-                print("Accuracy\n, train acc: %s, test acc: %s" % (train_acc, test_acc))
+                print("Loss: ", train_cost)
+                print("Epoch: %s, Accuracy\n, train acc: %s, test acc: %s" % (i, train_acc, test_acc))
 
                 # save model
                 if test_acc > pre_accuracy:

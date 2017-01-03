@@ -1,16 +1,14 @@
-'''
-A Multilayer Perceptron implementation example using TensorFlow library.
-This example is using the MNIST database of handwritten digits
-(http://yann.lecun.com/exdb/mnist/)
-Author: Aymeric Damien
-Project: https://github.com/aymericdamien/TensorFlow-Examples/
-'''
-
 from __future__ import print_function
 import numpy as np
 import tensorflow as tf
 
+'''
+Different to nn_example_2.py, this code shows how to organise all data-related code into a class.
 
+The else of the code is the same as the last example.
+'''
+
+# Data simulation
 class Data(object):
     def __init__(self, train_size, test_size, nb_feature, nb_classes, batch_size):
         self.train_size = train_size
@@ -60,10 +58,10 @@ def comput_acc(pred, target):
 
 
 # Parameters
-learning_rate = 0.001
-training_epochs = 100
+learning_rate = 0.01
+training_epochs = 10000
 batch_size = 100
-display_step = 5
+display_step = 50
 
 # Network Parameters
 n_hidden_1 = 8  # 1st layer number of features
@@ -114,6 +112,7 @@ init = tf.initialize_all_variables()
 train_size, test_size, nb_feature, nb_classes = 1000, 100, 16, 3
 data = Data(train_size, test_size, nb_feature, nb_classes, batch_size)
 total_batch = data.num_epoches
+x_test, y_test = data.get_test()
 
 # Launch the graph
 with tf.Session() as sess:
@@ -136,10 +135,8 @@ with tf.Session() as sess:
         if epoch % display_step == 0:
             print("Epoch:", '%04d' % (epoch + 1), "cost=", "{:.9f}".format(avg_cost))
 
-            print("Optimization Finished!")
-
             # Test model
             correct_prediction = tf.equal(tf.argmax(pred, 1), tf.argmax(y, 1))
             # Calculate accuracy
             accuracy = tf.reduce_mean(tf.cast(correct_prediction, "float"))
-            print("Accuracy:", accuracy.eval({x: batch_x, y: batch_y}))
+            print("Accuracy:", accuracy.eval({x: x_test, y: y_test}))
