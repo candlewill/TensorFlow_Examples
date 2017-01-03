@@ -7,3 +7,8 @@
 1_Sentiment_Classification/testdata.manual.2009.06.14.csv
 1_Sentiment_Classification/training.1600000.processed.noemoticon.csv
 1_Sentiment_Classification/training.csv
+1_Sentiment_Classification/model/nn_model.ckpt.meta
+*.DESKTOP-KP0GSC5
+1_Sentiment_Classification/model/nn_model.ckpt.index
+1_Sentiment_Classification/model/nn_model.ckpt.data-00000-of-00001
+1_Sentiment_Classification/model/checkpoint
