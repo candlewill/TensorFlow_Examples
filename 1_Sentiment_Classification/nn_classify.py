@@ -11,7 +11,10 @@ The result is very bad, as we do not use word embeddings and this code is just f
 
 Result:
 
-
+step: 193
+Train cost: 1.04949, test cost: 1.18598
+Accuracy
+Train acc: 0.501953, test acc: 0.365462
 '''
 
 
@@ -122,14 +125,14 @@ def comput_acc(pred, target):
 def run():
     # model parameters
     n_input_layer = 34963 + 1
-    n_hidden_layer_1 = 1024
-    n_hidden_layer_2 = 1024
-    n_hidden_layer_3 = 1024
-    n_hidden_layer_4 = 1024
+    n_hidden_layer_1 = 256
+    n_hidden_layer_2 = 256
+    n_hidden_layer_3 = 256
+    n_hidden_layer_4 = 256
     n_output_layer = 3  # 3 classes
 
     # training parameters
-    batch_size = 256
+    batch_size = 512
     epoch = 100000
     update_step = 64
     learning_rate = 0.01

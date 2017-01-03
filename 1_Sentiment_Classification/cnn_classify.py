@@ -8,7 +8,11 @@ Tweets classification using neural network. Word embeddings are used is this exa
 
 Result:
 
-
+step: 20480
+Train cost: 0.598435, test cost: 7.20083
+Accuracy
+Train acc: 0.78125, test acc: 0.586345
+Model saved at step 20480
 '''
 
 
@@ -186,13 +190,13 @@ def run():
     n_classes = 3  # 3 classes
     n_filters = 128
     filter_sizes = (3, 4, 5)
-    sequence_length = 40
+    sequence_length = 32
     vocab_size = 10000
 
     # training parameters
-    batch_size = 16
-    epoch = 100000
-    display_step = 32
+    batch_size = 128
+    epoch = 5000
+    display_step = 64
     learning_rate = 0.01
     dropout_keep_prob = 0.5
 
