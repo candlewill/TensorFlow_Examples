@@ -4,7 +4,7 @@ import numpy as np
 from collections import defaultdict
 
 '''
-Tweets classification using neural network. Word embeddings are used is this example.
+Tweets classification using convolutional neural network. Word embeddings are used is this example.
 
 Result:
 

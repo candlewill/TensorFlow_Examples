@@ -53,12 +53,12 @@ d, guerrilla, @_scene_queen_, maybes, mercurial, nags, #bfd, tins, @megdia, popo
 Train a neural network to classify the tweets:
 
 ```python
-python train_nn.py
+python nn_classify.py
 ```
 
 ## CNN
 Train a CNN to classify the tweets:
 
 ```python
-python train_cnn.py
+python cnn_classify.py
 ```
