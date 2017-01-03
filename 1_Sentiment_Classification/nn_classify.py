@@ -6,6 +6,12 @@ from collections import defaultdict
 
 '''
 Tweets classification using neural network
+
+The result is very bad, as we do not use word embeddings and this code is just for example.
+
+Result:
+
+
 '''
 
 
@@ -125,7 +131,7 @@ def run():
     # training parameters
     batch_size = 256
     epoch = 100000
-    update_step = 32
+    update_step = 64
     learning_rate = 0.01
 
     model = NN(n_input_layer, n_hidden_layer_1, n_hidden_layer_2, n_hidden_layer_3, n_hidden_layer_4, n_output_layer,
@@ -145,13 +151,13 @@ def run():
             _, train_cost = sess.run([model.train_op, model.cost], feed_dict={model.xs: x_batch, model.ys: y_batch})
 
             if i % update_step == 0:
-                test_cost = sess.run([model.cost], feed_dict={model.xs: x_test, model.ys: y_test})
-                print("step: %s\n, train cost: %s, test cost: %s" % (i, train_cost, test_cost))
+                test_cost = sess.run(model.cost, feed_dict={model.xs: x_test, model.ys: y_test})
+                print("step: %s\nTrain cost: %s, test cost: %s" % (i + 1, train_cost, test_cost))
 
                 acc = comput_acc(model.pred, model.ys)
                 train_acc = sess.run(acc, feed_dict={model.xs: x_batch, model.ys: y_batch})
                 test_acc = sess.run(acc, feed_dict={model.xs: x_test, model.ys: y_test})
-                print("Accuracy\n, train acc: %s, test acc: %s" % (train_acc, test_acc))
+                print("Accuracy\nTrain acc: %s, test acc: %s" % (train_acc, test_acc))
 
                 # save model
                 if test_acc > pre_accuracy:
