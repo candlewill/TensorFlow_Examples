@@ -91,7 +91,7 @@ def run():
     batch_size = 128
     num_epochs = 100
     maxlen = 16
-    step = 3
+    step = 1
     next_n = 1
 
     # model parameters
@@ -110,14 +110,16 @@ def run():
         i = 0
         for text in texts:
             x_batch, y_batch = zip(*text)
-            sess.run(tf.assign(model.learning_rate, 0.5 * (0.99 ** i)))
+            # lr = 0.5 * (0.99 ** i)
+            lr = 0.01
+            sess.run(tf.assign(model.learning_rate, lr))
 
             train_loss, _ = sess.run([model.loss, model.train_op],
                                      feed_dict={model.xs: x_batch, model.ys: y_batch})
-            print("Epoch: %s, loss: %s" % (i, train_loss))
             i += 1
-        if i % 100 == 0:
-            saver.save(sess, 'model/rnn.ckpt', global_step=i)
+            if i % 500 == 0:
+                print("Epoch: %s, loss: %s" % (i, train_loss))
+                saver.save(sess, 'model/rnn.ckpt', global_step=i)
 
 
 if __name__ == '__main__':
