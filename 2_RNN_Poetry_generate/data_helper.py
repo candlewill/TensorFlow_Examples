@@ -39,9 +39,14 @@ def vectorize_text(texts, vocab):
     return texts_vector
 
 
-def batch_iter(filename, batch_size, num_epochs, maxlen, step=1, shuffle=True):
+def batch_iter(filename, batch_size, num_epochs, maxlen, step=1, next_n=1, shuffle=True):
     """
     Generates a batch iterator for a dataset.
+    Parameters
+        filename: input txt file
+        maxlen: max sequence length
+        step: windows sliding step
+        next_n: use current windows to predict the next windows distant to n
     """
     texts = load_data(filename)
     vocab = build_vocab(texts, 10000)
@@ -50,22 +55,24 @@ def batch_iter(filename, batch_size, num_epochs, maxlen, step=1, shuffle=True):
     sentences = []
     next_sentences = []
     for sent_vec in data:
+        print(sent_vec)
         sent_len = len(sent_vec)
-        for i in range(0, sent_len-maxlen-1, step):
-            start_index=i
-            end_index=i+maxlen
-            sentences.append(sent_vec[start_index: end_index])
-            next_sentences.append(sent_vec[start_index+1: end_index+1])
-
+        for i in range(0, sent_len - maxlen - next_n, step):
+            start_index = i
+            end_index = i + maxlen
+            sent = sent_vec[start_index: end_index]
+            next_sent = sent_vec[start_index + next_n: end_index + next_n]
+            sentences.append(sent)
+            next_sentences.append(next_sent)
+    data = list(zip(sentences, next_sentences))
     """
     sentences         next_sentences
     [6,2,4,6,9]       [2,4,6,9,9]
     [1,4,2,8,5]       [4,2,8,5,5]
     """
-
     data = np.array(data)
     data_size = len(data)
-    num_batches_per_epoch = int((data_size-1)/batch_size) + 1
+    num_batches_per_epoch = int((data_size - 1) / batch_size) + 1
 
     for epoch in range(num_epochs):
         # Shuffle the data at each epoch
@@ -81,7 +88,7 @@ def batch_iter(filename, batch_size, num_epochs, maxlen, step=1, shuffle=True):
 
 
 if __name__ == '__main__':
-    data = batch_iter("poetry.txt", 128, 16, 10, 1)
+    data = batch_iter("poetry.txt", 128, 16, 10, 1, 10)
     for i in data:
         exit()
         print(i)

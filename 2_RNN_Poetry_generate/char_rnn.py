@@ -1,4 +1,4 @@
-from .data_helper import batch_iter
+from data_helper import batch_iter
 # import tensorflow as tf
 
 '''
@@ -10,7 +10,11 @@ def run():
     # training parameters
     batch_size = 128
     num_epochs = 100
-    texts = batch_iter("poetry.txt", batch_size, num_epochs)
+    texts = batch_iter("poetry.txt", 128, 16, 10, 1, 10)
+    for text in texts:
+        x_batch, y_batch = zip(*text)
+        print(x_batch)
+        print(y_batch)
 
     # Data
 
