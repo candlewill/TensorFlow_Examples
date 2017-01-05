@@ -25,7 +25,7 @@ def build_vocab(texts, vocab_size):
     words, _ = zip(*word_tf_pairs)
 
     # just use the top-n words according to word frequent
-    words = words[:vocab_size]
+    words = words[:vocab_size - 1]
     # word to ID
     word_idx = dict(zip(words, range(len(words))))
     # the index of OOV is 0
@@ -39,7 +39,7 @@ def vectorize_text(texts, vocab):
     return texts_vector
 
 
-def batch_iter(filename, batch_size, num_epochs, maxlen, step=1, next_n=1, shuffle=True):
+def batch_iter(filename, batch_size, num_epochs, maxlen, vocab_size, step=1, next_n=1, shuffle=True):
     """
     Generates a batch iterator for a dataset.
     Parameters
@@ -49,13 +49,12 @@ def batch_iter(filename, batch_size, num_epochs, maxlen, step=1, next_n=1, shuff
         next_n: use current windows to predict the next windows distant to n
     """
     texts = load_data(filename)
-    vocab = build_vocab(texts, 10000)
+    vocab = build_vocab(texts, vocab_size)
     data = vectorize_text(texts, vocab)
 
     sentences = []
     next_sentences = []
     for sent_vec in data:
-        print(sent_vec)
         sent_len = len(sent_vec)
         for i in range(0, sent_len - maxlen - next_n, step):
             start_index = i
