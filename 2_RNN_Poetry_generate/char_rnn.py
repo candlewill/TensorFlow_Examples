@@ -96,7 +96,7 @@ def run():
 
     # model parameters
     num_units = 128
-    num_rnn_layers = 2
+    num_rnn_layers = 1
     vocab_size = 10000
 
     model = RNN(batch_size, maxlen, num_units, num_rnn_layers, vocab_size)
@@ -104,8 +104,8 @@ def run():
     texts = batch_iter("poetry.txt", batch_size, num_epochs, maxlen, vocab_size, step, next_n)
 
     with tf.Session() as sess:
-        sess.run(tf.initialize_all_variables())
-        saver = tf.train.Saver(tf.all_variables())
+        sess.run(tf.global_variables_initializer())
+        saver = tf.train.Saver(tf.global_variables())
 
         i = 0
         for text in texts:
