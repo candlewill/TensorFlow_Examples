@@ -62,7 +62,8 @@ class RNN(object):
     def train(self):
         self.learning_rate = tf.Variable(0.0, trainable=False)
         t_vars = tf.trainable_variables()  # Returns all variables created with `trainable=True`.
-        grads, _ = tf.clip_by_global_norm(tf.gradients(self.loss, t_vars), 5)
+        grad_clip = 5  # clip gradients at this value
+        grads, _ = tf.clip_by_global_norm(tf.gradients(self.loss, t_vars), grad_clip)
         optimizer = tf.train.AdamOptimizer(self.learning_rate)
         self.train_op = optimizer.apply_gradients(zip(grads, t_vars))
 
@@ -90,12 +91,12 @@ def run():
     # training parameters
     batch_size = 128
     num_epochs = 100
-    maxlen = 16
+    maxlen = 8
     step = 1
     next_n = 1
 
     # model parameters
-    num_units = 128
+    num_units = 300
     num_rnn_layers = 1
     vocab_size = 10000
 
