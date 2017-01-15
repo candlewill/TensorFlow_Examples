@@ -46,3 +46,29 @@ M 唉/这/我/舅/母/出/殡/
 
 ## Pre-process
 
+1. Remove / , and group into question and answer
+
+ python pre_process.py
+
+2. Build vocabulary, and convert texts into vecotrs according to their index
+
+ python vectorizer.py
+
+The generated files: train_encode.vec and train_decode.vec are used for training, whose vocabulary is train_encode_vocabulary and train_decode_vocabulary, respectively.
+
+## Train
+
+ We use [seq2seq model](https://github.com/tensorflow/models/blob/master/tutorials/rnn/translate/seq2seq_model.py) on the training data. It will take a few hours.
+
+ python train.py
+
+
+## Decoding
+
+ Use the trained model to similate chat bot:
+
+ python decoding.py
+
+
+## Testing result
+
