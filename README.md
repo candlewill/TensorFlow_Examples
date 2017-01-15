@@ -11,3 +11,7 @@ This project use TensorFlow framework to do many interesting applications. Many 
  3. [Char RNN](./3_Char_RNN/README.md)
 
  Use Char_RNN to generate Enlighs sentence trained with tiny shakespeare corpus.
+
+ 4. [Chitchat Bot](./4_Chitchat/README.md)
+
+ Use movie dialog corpus to train a simple chit chat bot.
