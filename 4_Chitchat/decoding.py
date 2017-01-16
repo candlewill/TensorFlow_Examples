@@ -41,7 +41,7 @@ model.batch_size = 1
 
 with tf.Session() as sess:
     # 恢复前一次训练
-    ckpt = tf.train.get_checkpoint_state('.')
+    ckpt = tf.train.get_checkpoint_state('./model/')
     if ckpt != None:
         print(ckpt.model_checkpoint_path)
         model.saver.restore(sess, ckpt.model_checkpoint_path)

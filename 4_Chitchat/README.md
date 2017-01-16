@@ -108,3 +108,28 @@ The training loss is 2.57, and the PPL is about 15.
 
 
 ## Testing result
+
+me > 你好
+AI > 你好
+me > 你吃饭了吗
+AI > 吃了
+me > 见到你真好
+AI > 我也是
+me > 我爱你
+AI > 我也爱你
+me > 你结婚了吗
+AI > 我没有
+me > 你是女生还是男生
+AI > 是
+me > 女生还是男生
+AI > 我们是
+me > 你的回答好糟糕
+AI > 你是说，我们不是在谈论
+me > 今天天气怎么样
+AI > 我们会再见到你的
+me > 你在哪里
+AI > 我在哪里
+me > 谢谢你了
+AI > 别客气
+me > 再见
+AI > 再见
