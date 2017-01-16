@@ -10,8 +10,8 @@ The dataset will be downloaded automatically when run the program. If you want t
 
 1. word level text classification
 
-`python text_classification.py`
+ `python text_classification.py`
 
 2. character level text classification
 
-`python text_classification_character_rnn.py`
+ `python text_classification_character_rnn.py`
