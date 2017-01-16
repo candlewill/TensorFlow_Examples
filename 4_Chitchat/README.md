@@ -58,7 +58,7 @@ The generated files: train_encode.vec and train_decode.vec are used for training
 
 ## Train
 
- We use [seq2seq model](https://github.com/tensorflow/models/blob/master/tutorials/rnn/translate/seq2seq_model.py) on the training data. It will take a few hours.
+ We use [seq2seq model](https://github.com/tensorflow/models/blob/master/tutorials/rnn/translate/seq2seq_model.py) on the training data. It will about 24 hours to get the current performance.
 
  python train.py
 
@@ -109,6 +109,7 @@ The training loss is 2.57, and the PPL is about 15.
 
 ## Testing result
 
+```
 me > 你好
 AI > 你好
 me > 你吃饭了吗
@@ -133,3 +134,4 @@ me > 谢谢你了
 AI > 别客气
 me > 再见
 AI > 再见
+```
