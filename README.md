@@ -15,3 +15,7 @@ This project use TensorFlow framework to do many interesting applications. Many 
  4. [Chitchat Bot](./4_Chitchat/README.md)
 
  Use movie dialog corpus to train a simple chit chat bot.
+
+ 5. [LSTM for Text Classification](./5_LSTM_Text_Classification/README.md)
+
+ Use LSTM model to classify texts, including char level and word level.
