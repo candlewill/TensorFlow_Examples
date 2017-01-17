@@ -19,3 +19,13 @@ This project use TensorFlow framework to do many interesting applications. Many 
  5. [LSTM for Text Classification](./5_LSTM_Text_Classification/README.md)
 
  Use LSTM model to classify texts, including char level and word level.
+
+## Environment
+
+ * TensorFlow   0.12.1
+ * Python 3.5.1
+ * OS: Windows 10 or Ubuntu 16.04
+
+## Contact
+
+Yunchao He (yunchaohe@gmail.com)
