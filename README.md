@@ -20,6 +20,10 @@ This project use TensorFlow framework to do many interesting applications. Many 
 
  Use LSTM model to classify texts, including char level and word level.
 
+ 6. [Chinese Speech Recognition](./6_Chinese_ASR/README.md)
+
+ Use TensorFlow to train a Chinese Speech Recognition (ASR).
+
 ## Environment
 
  * TensorFlow   0.12.1
