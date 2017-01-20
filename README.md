@@ -24,6 +24,10 @@ This project use TensorFlow framework to do many interesting applications. Many 
 
  Use TensorFlow to train a Chinese Speech Recognition (ASR).
 
+ 7. [Gender classification according to Chinese Name](./7_Name_Gender/README.md)
+
+ Gender classification using Chinese names.
+
 ## Environment
 
  * TensorFlow   0.12.1
