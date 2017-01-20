@@ -266,8 +266,8 @@ def train_speech_to_text_network():
 
         saver = tf.train.Saver(tf.global_variables())
 
-        for epoch in range(16):
-            sess.run(tf.assign(lr, 0.001 * (0.97 ** epoch)))
+        for epoch in range(500):
+            sess.run(tf.assign(lr, 0.001 * (0.99 ** epoch)))
 
             global pointer
             pointer = 0
@@ -276,7 +276,7 @@ def train_speech_to_text_network():
                 train_loss, _ = sess.run([loss, optimizer_op], feed_dict={X: batches_wavs, Y: batches_labels})
                 print(epoch, batch, train_loss)
             if epoch % 5 == 0:
-                saver.save(sess, 'speech.module', global_step=epoch)
+                saver.save(sess, './model/speech.module', global_step=epoch)
 
 
 # 训练
@@ -293,10 +293,10 @@ def speech_to_text(wav_file):
 
     saver = tf.train.Saver()
     with tf.Session() as sess:
-        saver.restore(sess, tf.train.latest_checkpoint('.'))
+        saver.restore(sess, tf.train.latest_checkpoint('./model/'))
 
         decoded = tf.transpose(logit, perm=[1, 0, 2])
         decoded, _ = tf.nn.ctc_beam_search_decoder(decoded, sequence_len, merge_repeated=False)
         predict = tf.sparse_to_dense(decoded[0].indices, decoded[0].shape, decoded[0].values) + 1
         output = sess.run(decoded, feed_dict={X: mfcc})
-        # print(output)
+        print(output)
