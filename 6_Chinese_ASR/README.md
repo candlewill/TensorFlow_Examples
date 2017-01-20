@@ -12,12 +12,8 @@ We can use the following method to download the full required dataset to the `da
 $ sh download_data.sh
 ```
 
-## Run
+## Train
 
-1. word level text classification
-
- `python text_classification.py`
-
-2. character level text classification
-
- `python text_classification_character_rnn.py`
+```
+python train.py
+```
