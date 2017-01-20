@@ -4,7 +4,7 @@ Gender classification according to Chinese Name.
 
 ## Dataset
 
-The data is crawled from internet. There are 351,791 names in the dataset labeled as male and female. Note that a name could be labeled as male and female at the same time, as some Chinese names is neutral and suit for both.
+The [data](https://pan.baidu.com/s/1hsHTEU4) is crawled from internet. There are 351,791 names in the dataset labeled as male and female. Note that a name could be labeled as male and female at the same time, as some Chinese names is neutral and suit for both.
 
 The format of dataset:
 
