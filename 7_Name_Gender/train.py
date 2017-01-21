@@ -162,4 +162,4 @@ def detect_sex(name_list):
             i += 1
 
 
-detect_sex(["白富美", "高帅富", "王婷婷", "田野"])
+# detect_sex(["白富美", "高帅富", "王婷婷", "田野"])
