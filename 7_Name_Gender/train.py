@@ -121,10 +121,10 @@ def train_neural_network():
                 batch_x = train_x_vec[i * batch_size: (i + 1) * batch_size]
                 batch_y = train_y[i * batch_size: (i + 1) * batch_size]
                 _, loss_ = sess.run([train_op, loss], feed_dict={X: batch_x, Y: batch_y, dropout_keep_prob: 0.5})
-                print(e, i, loss_)
+            print(e, i, loss_)
             # 保存模型
             if e % 50 == 0:
-                saver.save(sess, "name2sex.model", global_step=e)
+                saver.save(sess, "./model/name2sex.model", global_step=e)
 
 
 train_neural_network()
@@ -146,7 +146,7 @@ def detect_sex(name_list):
     saver = tf.train.Saver(tf.global_variables())
     with tf.Session() as sess:
         # 恢复前一次训练
-        ckpt = tf.train.get_checkpoint_state('.')
+        ckpt = tf.train.get_checkpoint_state('./model/')
         if ckpt != None:
             print(ckpt.model_checkpoint_path)
             saver.restore(sess, ckpt.model_checkpoint_path)
