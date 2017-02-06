@@ -28,6 +28,10 @@ This project use TensorFlow framework to do many interesting applications. Many 
 
  Gender classification using Chinese names.
 
+ 8. [CAPTCHA identification](./8_CAPTCHA_Identification/README.md)
+
+ CAPTCHA identification using cnn-rnn
+
 ## Environment
 
  * TensorFlow   0.12.1
