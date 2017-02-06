@@ -17,3 +17,9 @@ $ sh download_data.sh
 ```
 python train.py
 ```
+
+## Decode
+
+```
+python decode.py
+```
