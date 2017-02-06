@@ -4,7 +4,7 @@ CAPTCHA identification using cnn-rnn
 
 ## Dataset
 
-Random generate using [captcha](./https://github.com/lepture/captcha)
+Random generate using [captcha](https://github.com/lepture/captcha)
 
 ## Train
 
